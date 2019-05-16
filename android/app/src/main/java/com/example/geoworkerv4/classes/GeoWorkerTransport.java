@@ -32,7 +32,7 @@ public class GeoWorkerTransport {
         this.timesCompleted = 0;
         this.identifier = _identifier;
 
-        this.download();
+        // this.download();
     }
 
     public int getSuccessfullyCompleted () {
@@ -55,7 +55,7 @@ public class GeoWorkerTransport {
         return identifier;
     }
 
-    private int getTimesCompleted() {
+    public int getTimesCompleted() {
         return timesCompleted;
     }
 

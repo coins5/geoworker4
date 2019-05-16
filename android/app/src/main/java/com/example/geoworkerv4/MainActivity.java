@@ -11,13 +11,17 @@ import io.flutter.plugin.common.MethodChannel;
 // import com.example.flutter_to_native.classes.GeoWorkerTransport;
 import com.example.geoworkerv4.utils.Task;
 
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
 public class MainActivity extends FlutterActivity {
   private static final String CHANNEL = "vida.software/geoworkerv4";
+  private ArrayList<Task> tasks;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -28,8 +32,13 @@ public class MainActivity extends FlutterActivity {
               @Override
               public void onMethodCall(MethodCall call, MethodChannel.Result result) {
                 if (call.method.equals("startGeoWorker")) {
-                  startGeoWorker();
+                  int threads = call.argument("threads");
+                  startGeoWorker(threads);
                   result.success(null);
+                }
+
+                if (call.method.equals("getStats")) {
+                  result.success(createTasksMapList());
                 }
               }});
   }
@@ -37,7 +46,7 @@ public class MainActivity extends FlutterActivity {
   private void startGeoWorker() {
     System.out.println("Iniciando el transporte");
 
-    ArrayList<Task> tasks = new ArrayList<>();
+    tasks = new ArrayList<>();
     int TASKS_COUNT = 10;
     for (int i = 0; i < TASKS_COUNT; i++) {
       tasks.add(new Task(this.getApplicationContext(),"Transporte " + i));
@@ -50,5 +59,31 @@ public class MainActivity extends FlutterActivity {
     }
 
     pool.shutdown();
+  }
+
+  private void startGeoWorker(int threads) {
+    System.out.println("Iniciando el transporte");
+
+    tasks = new ArrayList<>();
+    for (int i = 0; i < threads; i++) {
+      tasks.add(new Task(this.getApplicationContext(),"Transporte " + i));
+    }
+
+    ExecutorService pool = Executors.newFixedThreadPool(threads);
+
+    for (int i = 0; i < threads; i++) {
+      pool.execute(tasks.get(i));
+    }
+
+    pool.shutdown();
+  }
+
+  public List<Map<String, Object>> createTasksMapList() {
+
+    List<Map<String, Object>> result = new ArrayList<Map<String, Object>>(this.tasks.size());
+    for (Task task : this.tasks) {
+      result.add(task.createTaskMap());
+    }
+    return result;
   }
 }
