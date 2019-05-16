@@ -22,6 +22,7 @@ public class GeoWorker {
 
     private int successfullyCompleted;
     private int completedWithErrors;
+    private int notFound;
     private String identifier;
 
     private final Geocoder geoCoder;
@@ -74,6 +75,8 @@ public class GeoWorker {
 
             if (addressList.size() == 0) {
                 // Not found
+                this.notFound++;
+
                 exportedItem.setX(0.0);
                 exportedItem.setY(0.0);
                 exportedItem.setExact(false);
@@ -112,10 +115,14 @@ public class GeoWorker {
     }
 
     public int getSuccessfullyCompleted() {
-        return successfullyCompleted;
+        return this.successfullyCompleted;
     }
 
     public int getCompletedWithErrors() {
-        return completedWithErrors;
+        return this.completedWithErrors;
+    }
+
+    public int getNotFound() {
+        return this.notFound;
     }
 }

@@ -43,24 +43,6 @@ public class MainActivity extends FlutterActivity {
               }});
   }
 
-  private void startGeoWorker() {
-    System.out.println("Iniciando el transporte");
-
-    tasks = new ArrayList<>();
-    int TASKS_COUNT = 10;
-    for (int i = 0; i < TASKS_COUNT; i++) {
-      tasks.add(new Task(this.getApplicationContext(),"Transporte " + i));
-    }
-
-    ExecutorService pool = Executors.newFixedThreadPool(TASKS_COUNT);
-
-    for (int i = 0; i < TASKS_COUNT; i++) {
-      pool.execute(tasks.get(i));
-    }
-
-    pool.shutdown();
-  }
-
   private void startGeoWorker(int threads) {
     System.out.println("Iniciando el transporte");
 
