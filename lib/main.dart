@@ -67,6 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
       print(stat.identifier);
       print(stat.successfullyCompleted);
       print(stat.completedWithErrors);
+      print(stat.totalSuccessfullyCompleted + stat.successfullyCompleted);
+      print(stat.totalCompletedWithErrors + stat.completedWithErrors);
       print("-----");
     });
   }

@@ -24,6 +24,9 @@ public class GeoWorkerTransport {
     private boolean isConnected;
     private int currentDataSize;
 
+    private int totalSuccessfullyCompleted;
+    private int totalCompletedWithErrors;
+
     public GeoWorkerTransport (Context _context, String _identifier) {
         this.context = _context;
 
@@ -41,6 +44,14 @@ public class GeoWorkerTransport {
 
     public int getCompletedWithErrors() {
         return geoWorker.getCompletedWithErrors();
+    }
+
+    public int getTotalSuccessfullyCompleted () {
+        return totalSuccessfullyCompleted;
+    }
+
+    public int getTotalCompletedWithErrors() {
+        return totalCompletedWithErrors;
     }
 
     public int getCurrentDataSize() {
@@ -84,7 +95,13 @@ public class GeoWorkerTransport {
                 else return;
             } else {
                 System.out.println(this.identifier + " - MULTI CODE");
-                this.upload(geoWorker.multiGeocode());
+                // Add to totalSuccessfullyCompleted
+                // Add to total
+                String multiGeocodeData = geoWorker.multiGeocode();
+                totalSuccessfullyCompleted += geoWorker.getSuccessfullyCompleted();
+                totalCompletedWithErrors += geoWorker.getCompletedWithErrors();
+
+                this.upload(multiGeocodeData);
                 // geoWorker.multiGeocode().then((data) => this.upload(data));
             }
 

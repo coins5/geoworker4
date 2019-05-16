@@ -5,6 +5,8 @@ class Stats {
 
   final int successfullyCompleted;
   final int completedWithErrors;
+  final int totalSuccessfullyCompleted;
+  final int totalCompletedWithErrors;
   final int currentDataSize;
   final bool isConnected;
   final String identifier;
@@ -13,6 +15,8 @@ class Stats {
   Stats(
     this.successfullyCompleted,
     this.completedWithErrors,
+    this.totalSuccessfullyCompleted,
+    this.totalCompletedWithErrors,
     this.currentDataSize,
     this.isConnected,
     this.identifier,
@@ -23,6 +27,8 @@ class Stats {
   Stats.fromMap(Map map) :
         this.successfullyCompleted = map["successfullyCompleted"],
         this.completedWithErrors = map["completedWithErrors"],
+        this.totalSuccessfullyCompleted = map["totalSuccessfullyCompleted"],
+        this.totalCompletedWithErrors = map["totalCompletedWithErrors"],
         this.currentDataSize = map["currentDataSize"],
         this.isConnected = map["isConnected"],
         this.identifier = map["identifier"],
@@ -32,11 +38,13 @@ class Stats {
   Map toMap() => {
     "successfullyCompleted": this.successfullyCompleted,
     "completedWithErrors": this.completedWithErrors,
+    "totalSuccessfullyCompleted": this.totalSuccessfullyCompleted,
+    "totalCompletedWithErrors": this.totalCompletedWithErrors,
     "currentDataSize": this.currentDataSize,
     "isConnected": this.isConnected,
     "identifier": this.identifier,
     "timesCompleted": this.timesCompleted
   };
 
-  String toString() => "{$successfullyCompleted,$completedWithErrors,$currentDataSize,$isConnected,$identifier,$timesCompleted}";
+  String toString() => "{$successfullyCompleted,$completedWithErrors,$completedWithErrors,$totalCompletedWithErrors,$currentDataSize,$isConnected,$identifier,$timesCompleted}";
 }

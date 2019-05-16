@@ -20,6 +20,8 @@ public class Task implements Runnable {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("successfullyCompleted", this.geoWorkerTransport.getSuccessfullyCompleted());
         result.put("completedWithErrors", this.geoWorkerTransport.getCompletedWithErrors());
+        result.put("totalSuccessfullyCompleted", this.geoWorkerTransport.getTotalSuccessfullyCompleted());
+        result.put("totalCompletedWithErrors", this.geoWorkerTransport.getTotalCompletedWithErrors());
         result.put("currentDataSize", this.geoWorkerTransport.getCurrentDataSize());
         result.put("isConnected", this.geoWorkerTransport.getIsConnected());
         result.put("identifier", this.geoWorkerTransport.getIdentifier());
