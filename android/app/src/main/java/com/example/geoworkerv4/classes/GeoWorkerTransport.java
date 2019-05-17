@@ -28,6 +28,8 @@ public class GeoWorkerTransport {
     private int totalCompletedWithErrors;
     private int totalNotFound;
 
+    private boolean isReady;
+
     public GeoWorkerTransport (Context _context, String _identifier) {
         this.context = _context;
 
@@ -35,6 +37,8 @@ public class GeoWorkerTransport {
         this.pushUrl = this.base + "/push";
         this.timesCompleted = 0;
         this.identifier = _identifier;
+
+        this.isReady = false;
 
         // this.download();
     }
@@ -79,6 +83,10 @@ public class GeoWorkerTransport {
         return timesCompleted;
     }
 
+    public boolean getIsReady() {
+        return isReady;
+    }
+
     public void download () {
         OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(1000 * 30, TimeUnit.MILLISECONDS);
@@ -89,6 +97,7 @@ public class GeoWorkerTransport {
         try {
             Response response = client.newCall(request).execute();
             geoWorker = new GeoWorker(this.context, response.body().string(), this.identifier);
+            this.isReady = true;
 
             this.isConnected = geoWorker.importedAddresses.getConnected();
             this.currentDataSize = geoWorker.importedAddresses.getItems().size();

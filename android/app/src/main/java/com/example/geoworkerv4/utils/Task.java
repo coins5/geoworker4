@@ -18,17 +18,19 @@ public class Task implements Runnable {
 
     public Map<String, Object> createTaskMap() {
         Map<String, Object> result = new HashMap<String, Object>();
-        result.put("successfullyCompleted", this.geoWorkerTransport.getSuccessfullyCompleted());
-        result.put("completedWithErrors", this.geoWorkerTransport.getCompletedWithErrors());
-        result.put("notFound", this.geoWorkerTransport.getNotFound());
-        result.put("totalSuccessfullyCompleted", this.geoWorkerTransport.getTotalSuccessfullyCompleted());
-        result.put("totalCompletedWithErrors", this.geoWorkerTransport.getTotalCompletedWithErrors());
-        result.put("totalNotFound", this.geoWorkerTransport.getTotalNotFound());
-        result.put("currentDataSize", this.geoWorkerTransport.getCurrentDataSize());
+        boolean isReady = this.geoWorkerTransport.getIsReady();
+
+        result.put("successfullyCompleted", !isReady ? 0 : this.geoWorkerTransport.getSuccessfullyCompleted());
+        result.put("completedWithErrors", !isReady ? 0 : this.geoWorkerTransport.getCompletedWithErrors());
+        result.put("notFound", !isReady ? 0 : this.geoWorkerTransport.getNotFound());
+        result.put("totalSuccessfullyCompleted", !isReady ? 0 : this.geoWorkerTransport.getTotalSuccessfullyCompleted());
+        result.put("totalCompletedWithErrors", !isReady ? 0 : this.geoWorkerTransport.getTotalCompletedWithErrors());
+        result.put("totalNotFound", !isReady ? 0 : this.geoWorkerTransport.getTotalNotFound());
+        result.put("currentDataSize", !isReady ? 0 : this.geoWorkerTransport.getCurrentDataSize());
         result.put("isConnected", this.geoWorkerTransport.getIsConnected());
         result.put("identifier", this.geoWorkerTransport.getIdentifier());
-        result.put("timesCompleted", this.geoWorkerTransport.getTimesCompleted());
-
+        result.put("timesCompleted", !isReady ? 0 : this.geoWorkerTransport.getTimesCompleted());
+        result.put("isReady", isReady);
         return result;
     }
 
