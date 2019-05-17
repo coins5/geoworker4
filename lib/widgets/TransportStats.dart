@@ -46,17 +46,6 @@ class TransportStats {
     ),
     trailing:
         Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
-    onTap: () {
-      print("GetDetails");
-      /*
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DetailPage(stats: stats)
-        )
-      );
-      */
-    },
   );
 
   Card makeCard(Stats stats) => Card(
