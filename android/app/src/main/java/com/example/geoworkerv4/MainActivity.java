@@ -33,7 +33,8 @@ public class MainActivity extends FlutterActivity {
               public void onMethodCall(MethodCall call, MethodChannel.Result result) {
                 if (call.method.equals("startGeoWorker")) {
                   int threads = call.argument("threads");
-                  startGeoWorker(threads);
+                  String server = call.argument("server");
+                  startGeoWorker(threads, server);
                   result.success(null);
                 }
 
@@ -43,12 +44,12 @@ public class MainActivity extends FlutterActivity {
               }});
   }
 
-  private void startGeoWorker(int threads) {
+  private void startGeoWorker(int threads, String server) {
     System.out.println("Iniciando el transporte");
 
     tasks = new ArrayList<>();
     for (int i = 0; i < threads; i++) {
-      tasks.add(new Task(this.getApplicationContext(),"Transporte " + i));
+      tasks.add(new Task(this.getApplicationContext(),"Transporte " + i, server));
     }
 
     ExecutorService pool = Executors.newFixedThreadPool(threads);

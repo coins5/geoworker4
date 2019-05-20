@@ -11,9 +11,9 @@ import java.util.Map;
 public class Task implements Runnable {
     private GeoWorkerTransport geoWorkerTransport;
 
-    public Task(Context _context, String _name)
+    public Task(Context _context, String _name, String server)
     {
-        this.geoWorkerTransport = new GeoWorkerTransport(_context, _name);
+        this.geoWorkerTransport = new GeoWorkerTransport(_context, _name, server);
     }
 
     public Map<String, Object> createTaskMap() {

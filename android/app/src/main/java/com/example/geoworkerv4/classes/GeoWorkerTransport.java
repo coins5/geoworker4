@@ -11,7 +11,7 @@ import com.squareup.okhttp.Response;
 import java.util.concurrent.TimeUnit;
 
 public class GeoWorkerTransport {
-    private String base = "http://192.168.0.175:2193";
+    // private String base = "http://192.168.0.175:2193";
     private String fetchUrl;
     private String pushUrl;
 
@@ -30,11 +30,11 @@ public class GeoWorkerTransport {
 
     private boolean isReady;
 
-    public GeoWorkerTransport (Context _context, String _identifier) {
+    public GeoWorkerTransport (Context _context, String _identifier, String server) {
         this.context = _context;
 
-        this.fetchUrl = this.base + "/fetch";
-        this.pushUrl = this.base + "/push";
+        this.fetchUrl = server + "/fetch";
+        this.pushUrl = server + "/push";
         this.timesCompleted = 0;
         this.identifier = _identifier;
 
