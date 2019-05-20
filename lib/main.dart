@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geoworkerv4/pages/GeoworkerPage.dart';
+// import 'package:geoworkerv4/pages/GeoworkerPage.dart';
 import 'package:geoworkerv4/pages/ConfigPage.dart';
 
 void main() => runApp(MyApp());
