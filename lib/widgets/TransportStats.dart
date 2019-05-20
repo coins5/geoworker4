@@ -44,8 +44,8 @@ class TransportStats {
         )
       ],
     ),
-    trailing:
-        Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+    // trailing: Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+    
   );
 
   Card makeCard(Stats stats) => Card(
