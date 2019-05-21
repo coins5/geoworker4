@@ -125,7 +125,7 @@ class _ConfigPageState extends State<ConfigPage> {
     String _device = prefs.getString('DEVICE');
     String _threads = prefs.getString('THREADS');
     setState(() {
-      serverNameController.text = (_server == null || _server.length == 0) ? 'http://192.168.0.170:2193' : _server;
+      serverNameController.text = (_server == null || _server.length == 0) ? 'http://rexweb.cloud:2193' : _server;
       deviceNameController.text = (_device == null || _device.length == 0) ? androidInfo.model : _server ;
       threadsController.text = (_threads == null || _threads.length == 0) ? '5' : _threads ;
     });
